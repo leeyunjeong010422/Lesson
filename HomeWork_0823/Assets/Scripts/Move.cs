@@ -19,9 +19,10 @@ public class Move : MonoBehaviour
         // 捞悼 贸府
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime, Space.Self);
 
-            // 雀傈 贸府
-            Quaternion lookRot = Quaternion.LookRotation(moveDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, rotateSpeed * Time.deltaTime);
-        
+        // 雀傈 贸府
+        Quaternion lookRot = Quaternion.LookRotation(moveDir);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, rotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, rotateSpeed * Time.deltaTime);
+
     }
 }
