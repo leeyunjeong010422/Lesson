@@ -1772,6 +1772,8 @@ MonoBehaviour:
   maxRotateSpeed: 500
   liftRotateSpeed: 300
   liftSpeed: 2
+  fuel: 100
+  fuelDecrease: 20
 --- !u!1 &1748880489
 GameObject:
   m_ObjectHideFlags: 0
