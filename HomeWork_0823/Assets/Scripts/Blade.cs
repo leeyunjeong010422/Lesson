@@ -12,7 +12,8 @@ public class Blade : MonoBehaviour
     [SerializeField] float fuel = 100; //연료
     [SerializeField] float fuelDecrease; //연료감소량
 
-    [SerializeField] GameObject missile;
+    [SerializeField] Rigidbody missile;
+    [SerializeField] Rigidbody missileRigidbody;
     [SerializeField] Transform missileSpawnPoint; //미사일 발사 위치
     [SerializeField] float missileSpeed; //미사일 속도
     [SerializeField] float missileFireRate; //미사일 연사 주기
@@ -83,7 +84,7 @@ public class Blade : MonoBehaviour
     {
         if (curRotateSpeed >= liftRotateSpeed)
         {
-            if (Input.GetKey(KeyCode.Keypad0) && missileFireCoolTime <= 0 && missileCount < maxMissile)
+            if (Input.GetKeyDown(KeyCode.Keypad0) && missileFireCoolTime <= 0 && missileCount < maxMissile)
             {
                 FireMissile();
                 missileFireCoolTime = missileFireRate;
@@ -98,8 +99,9 @@ public class Blade : MonoBehaviour
 
     private void FireMissile()
     {
-        GameObject missileobject = Instantiate(missile, missileSpawnPoint.position, missileSpawnPoint.rotation);
-        Rigidbody rigid = missileobject.GetComponent<Rigidbody>();
+        missileRigidbody = Instantiate(missile, missileSpawnPoint.position, missileSpawnPoint.rotation);
+        missileRigidbody.AddForce(Vector3.forward * 10, ForceMode.Impulse);
+        //Rigidbody rigid = missileobject.GetComponent<Rigidbody>();
 
         if (rigid != null)
         {
