@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
         float z = Input.GetAxis("Vertical");   // 앞뒤 입력
 
         // 입력된 방향으로 움직임
-        Vector3 moveDir = new Vector3(-z, 0, x);
+        Vector3 moveDir = new Vector3(-x, 0, -z);
         if (moveDir == Vector3.zero)
             return;
         // 이동 처리

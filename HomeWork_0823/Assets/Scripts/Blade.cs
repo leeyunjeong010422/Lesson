@@ -12,14 +12,13 @@ public class Blade : MonoBehaviour
     [SerializeField] float fuel = 100; //연료
     [SerializeField] float fuelDecrease; //연료감소량
 
-    [SerializeField] Rigidbody missile;
-    [SerializeField] Rigidbody missileRigidbody;
+    [SerializeField] GameObject missilePrefab;
     [SerializeField] Transform missileSpawnPoint; //미사일 발사 위치
     [SerializeField] float missileSpeed; //미사일 속도
     [SerializeField] float missileFireRate; //미사일 연사 주기
     [SerializeField] int maxMissile = 3; //최대 미사일 수 3개
     private float missileFireCoolTime; //미사일 연사쿨타임
-    private float missileCount; //존재하는 미사일 수
+    private float missileCount = 0; //존재하는 미사일 수
 
 
 
@@ -99,16 +98,17 @@ public class Blade : MonoBehaviour
 
     private void FireMissile()
     {
-        missileRigidbody = Instantiate(missile, missileSpawnPoint.position, missileSpawnPoint.rotation);
-        missileRigidbody.AddForce(Vector3.forward * 10, ForceMode.Impulse);
-        //Rigidbody rigid = missileobject.GetComponent<Rigidbody>();
+        GameObject missileInstance = Instantiate(missilePrefab, missileSpawnPoint.position, missileSpawnPoint.rotation);
+        //missileInstance.AddForce(Vector3.forward * 30, ForceMode.Impulse);
+        Rigidbody missileRigid = missileInstance.GetComponent<Rigidbody>();
 
-        if (rigid != null)
+        if(missileRigid != null)
         {
-            rigid.velocity = missileSpawnPoint.forward * missileSpeed;
+            missileRigid.velocity = missileSpawnPoint.forward * missileSpeed;
         }
 
         missileCount++;
-        Destroy(missileobject, 4f);
+
+        Destroy(missileInstance, 4f);
     }
 }
