@@ -9,7 +9,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] List<PooledObject> pool = new List<PooledObject>();
     
     //어떤 오브젝트를 만들어서 보관할 건지
-    [SerializeField] PooledObject prefeb;
+    [SerializeField] PooledObject prefab;
 
     //몇 개 만들 건지 사이즈 정하기
     [SerializeField] int size;
@@ -19,7 +19,7 @@ public class ObjectPool : MonoBehaviour
         for(int i = 0; i < size; i++)
         {
             //사이즈만큼 PooledObject를 만듦
-            PooledObject instance = Instantiate(prefeb);
+            PooledObject instance = Instantiate(prefab);
             //비활성화를 해서 보관을 해야 함(활성화 되어 있을 경우 예를 들어 총알 10개를 만들면 10개의 총알이 날아가기 때문에)
             instance.gameObject.SetActive(false);
             //만들어지자마자 pool을 가지고 있는 애를 부모로 지정 (보기 편해짐)
@@ -57,7 +57,7 @@ public class ObjectPool : MonoBehaviour
         //남은 게 없으면 만들어서 줌(없으면 대여해줄 수 없으니까)
         else
         {
-            PooledObject instance = Instantiate(prefeb, position, rotation);
+            PooledObject instance = Instantiate(prefab, position, rotation);
             instance.returnPool = this;
             return instance;
         }
