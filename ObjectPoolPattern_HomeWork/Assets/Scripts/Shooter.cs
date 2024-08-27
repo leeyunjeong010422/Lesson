@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class Shooter : MonoBehaviour
 {
@@ -9,22 +8,47 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] Transform muzzlePoint;
 
-    [Range(1, 20)]
-    [SerializeField] float bulletSpeed;
+    [SerializeField] float bulletSpeed; //기본스피드
+    [SerializeField] float maxBulletSpeed; //최대스피드
+    [SerializeField] float changeBulletSpeed; //꾹 눌렀을 때 증가할 스피드 (어느정도씩 증가할 것인지)
+
+    private float curBulletSpeed; //현재스피드
+    private bool isGetKey; //GetKey가 눌렸는지
+    private bool nextFire; //다음 발사
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Alpha3))
         {
-            Fire(1);
+            isGetKey = true;
+            curBulletSpeed += changeBulletSpeed * Time.deltaTime;
+            curBulletSpeed = Mathf.Clamp(curBulletSpeed, bulletSpeed, maxBulletSpeed);
+
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            Fire(2);
+            isGetKey = false;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Fire(3);
+            if (nextFire)
+            {
+                int bulletType = 0;
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                    bulletType = 1;
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                    bulletType = 2;
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                    bulletType = 3;
+
+                Fire(bulletType);
+            }
+            else
+            {
+                nextFire = true;
+            }
         }
     }
 
@@ -48,7 +72,12 @@ public class Shooter : MonoBehaviour
         if (bullets != null)
         {
             Bullet bullet = Instantiate(bullets, muzzlePoint.position, muzzlePoint.rotation);
-            bullet.SetSpeed(bulletSpeed * muzzlePoint.forward);
+
+            float finalSpeed = isGetKey ? curBulletSpeed : bulletSpeed;
+            bullet.SetSpeed(muzzlePoint.forward * finalSpeed);
+
+            curBulletSpeed = bulletSpeed;
+            nextFire = false;
         }
     }
 }

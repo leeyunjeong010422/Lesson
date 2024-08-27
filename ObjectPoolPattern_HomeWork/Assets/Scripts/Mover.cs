@@ -21,7 +21,7 @@ public class Mover : MonoBehaviour
 
     private void Move()
     {
-        //기존 Horizontal과 Vertical은 AWSD 뿐만 아니라 방향키도 포함하기 때문에 새로운 InputManager 생성
+        //기존 Horizontal과 Vertical은 AWSD 뿐만 아니라 방향키도 포함하기 때문에 새로운 Input Manager 생성
         float x = Input.GetAxis("Tank_Horizontal");
         float z = Input.GetAxis("Tank_Vertical");
 
