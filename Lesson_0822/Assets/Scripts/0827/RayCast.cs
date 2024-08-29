@@ -17,6 +17,7 @@ public class RayCast : MonoBehaviour
         //RaycastHit hit; //어떻게 부딪혔는지 (부딪힌 정보)
 
         //Physics.Raycast(쏘는 위치, 쏘는 방향, 부딪힌 정보(out), 최대거리, 레이어마스크(충돌확인 그룹 - 타켓 그룹))
+        //layerMask: 내가 총에 대한 레이저를 받을 레이어와 안 받을 레이어를 지정해 주고 선별적으로 레이저를 받을 수 있음
         if (Physics.Raycast(muzzlePoint.position, muzzlePoint.forward, out RaycastHit hit, maxDistance, layerMask))
         {
             //레이저에 부딪힌 게 있을 때

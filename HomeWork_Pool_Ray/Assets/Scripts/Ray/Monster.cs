@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    //몬스터 리스폰 구현 X
     [SerializeField] Rigidbody rb;
     [SerializeField] float speed;
     [SerializeField] Transform target;
 
     private void Start()
     {
-        transform.LookAt(target.position);
+        if (target == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                target = player.transform;
+            }
+        }
+    }
 
-        rb.velocity = transform.forward * speed;
+    private void Update()
+    {
+        // 타겟을 향해 일정한 속도로 이동합니다.
+        if (target != null)
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+        }
     }
 
     public void SetTarget(Transform target)
@@ -23,7 +37,7 @@ public class Monster : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Tank")
+        if (collision.gameObject.tag == "Player")
         {
             RayMover rayMover = collision.gameObject.GetComponent<RayMover>();
             Destroy(gameObject);
