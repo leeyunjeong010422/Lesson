@@ -15,8 +15,8 @@ public class RayMover : MonoBehaviour
 
     private float turretVerticalAngle = 0f;
 
-    private int hits = 0; //ºÎµúÈù È½¼ö
-    [SerializeField] int hitGameOut = 5; //5¹ø ºÎµúÈ÷¸é °ÔÀÓ ³¡
+    //private int hits = 0; //ºÎµúÈù È½¼ö
+    //[SerializeField] int hitGameOut = 5; //5¹ø ºÎµúÈ÷¸é °ÔÀÓ ³¡
 
     private void Update()
     {

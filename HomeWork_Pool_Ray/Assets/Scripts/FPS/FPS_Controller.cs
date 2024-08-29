@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class FPS_Controller : MonoBehaviour
 {
@@ -11,10 +9,18 @@ public class FPS_Controller : MonoBehaviour
     [SerializeField] public int attack;
 
     [SerializeField] Target target;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] float fireRate;
+    [SerializeField] int maxAmmo = 30;
+
+    private int currentAmmo;
+    private bool isFiring;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        currentAmmo = maxAmmo;
     }
 
     private void Update()
@@ -22,9 +28,9 @@ public class FPS_Controller : MonoBehaviour
         Move();
         Look();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isFiring && currentAmmo > 0)
         {
-            Fire();
+            StartCoroutine(Fire());
         }
     }
 
@@ -48,17 +54,32 @@ public class FPS_Controller : MonoBehaviour
         camTransform.Rotate(Vector3.right, rotateSpeed * -y * Time.deltaTime);
     }
 
-    private void Fire()
+    private IEnumerator Fire()
     {
-        if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit))
-        {
-            GameObject instance = hit.collider.gameObject;
-            Target target = instance.GetComponent<Target>();
+        isFiring = true;
 
-            if (target != null)
+        while (Input.GetMouseButton(0) && currentAmmo > 0)
+        {
+            currentAmmo--;
+            if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit))
             {
-                target.TakeHit(attack);
+                GameObject instance = hit.collider.gameObject;
+                Target target = instance.GetComponent<Target>();
+
+                if (target != null)
+                {
+                    target.TakeHit(attack);
+                }
             }
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            yield return new WaitForSeconds(fireRate);
         }
+        if (currentAmmo <= 0)
+        {
+            Debug.Log("장전이 필요합니다!");
+        }
+
+        isFiring = false;
     }
 }
