@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    //1,2,3 으로 발사하는 줄 알고 잘못 만들었던 스크립트인데 지우기 아쉬워서 그냥 냅둘게요...
+
     [SerializeField] Bullet bulletPrefab_1;
     [SerializeField] Bullet bulletPrefab_2;
     [SerializeField] Bullet bulletPrefab_3;
@@ -74,7 +76,7 @@ public class Shooter : MonoBehaviour
             Bullet bullet = Instantiate(bullets, muzzlePoint.position, muzzlePoint.rotation);
 
             float finalSpeed = isGetKey ? curBulletSpeed : bulletSpeed;
-            bullet.SetSpeed(muzzlePoint.forward * finalSpeed);
+            //bullet.SetSpeed(muzzlePoint.forward * finalSpeed);
 
             curBulletSpeed = bulletSpeed;
             nextFire = false;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
@@ -11,17 +9,45 @@ public class Mover : MonoBehaviour
     [Range(0f, 80f)]
     [SerializeField] float maxTurretVerticalAngle;
 
+    [SerializeField] Transform muzzlePoint;
+
+    [SerializeField] ObjectPool[] bulletPool;
+    private ObjectPool curBulletPool;
+
     private float turretVerticalAngle = 0f;
+
+    private void Awake()
+    {
+        curBulletPool = bulletPool[0];
+    }
 
     private void Update()
     {
         Move();
         RotateTurret();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
+
+        //총알 변경이 안되는데 도저히 왜 변경이 안되는지 모르겠습니다...
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SwapBullet(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwapBullet(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SwapBullet(2);
+        }
     }
 
     private void Move()
     {
-        //기존 Horizontal과 Vertical은 AWSD 뿐만 아니라 방향키도 포함하기 때문에 새로운 Input Manager 생성
         float x = Input.GetAxis("Tank_Horizontal");
         float z = Input.GetAxis("Tank_Vertical");
 
@@ -44,5 +70,16 @@ public class Mover : MonoBehaviour
 
         turretVerticalAngle = Mathf.Clamp(turretVerticalAngle, -maxTurretVerticalAngle, maxTurretVerticalAngle);
         turretTransform.localRotation = Quaternion.Euler(turretVerticalAngle, turretTransform.localEulerAngles.y, 0f);
+    }
+
+    private void Fire()
+    {
+        curBulletPool.GetPool(muzzlePoint.position, muzzlePoint.rotation);
+
+    }
+
+    private void SwapBullet(int index)
+    {
+        curBulletPool = bulletPool[index];
     }
 }

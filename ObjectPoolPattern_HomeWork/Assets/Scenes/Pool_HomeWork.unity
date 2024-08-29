@@ -327,30 +327,62 @@ MonoBehaviour:
   rotateSpeed: 50
   turretRotateSpeed: 50
   maxTurretVerticalAngle: 80
---- !u!1 &1513268597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7189117171667014730, guid: ba6753669b45886449b7aaaf7496277c, type: 3}
-  m_PrefabInstance: {fileID: 919799469114245507}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1513268602
+  muzzlePoint: {fileID: 783292540}
+  bulletPool:
+  - {fileID: 1169009732}
+  - {fileID: 1169009732}
+  - {fileID: 1169009732}
+--- !u!114 &1169009732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513268597}
+  m_GameObject: {fileID: 1169009728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb8c8bca5828b04c9734079a4ea8183, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c3e6d9d5dc329641961f8440ea5c825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab_1: {fileID: -7601736560168883758, guid: 50f874bc9cc7ea94ea04312d751d31c3, type: 3}
-  bulletPrefab_2: {fileID: -7601736560168883758, guid: 31ae7cda1aa71464c8c89cd8a99feacd, type: 3}
-  bulletPrefab_3: {fileID: -7601736560168883758, guid: 876eaa7b712c9ee42a03fce153615442, type: 3}
-  muzzlePoint: {fileID: 783292540}
-  bulletSpeed: 10
-  maxBulletSpeed: 100
-  changeBulletSpeed: 10
+  pool: []
+  prefab: {fileID: 5659590018896762691, guid: 50f874bc9cc7ea94ea04312d751d31c3, type: 3}
+  size: 5
+  capacity: 5
+  createOnEmpty: 0
+--- !u!114 &1169009733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169009728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3e6d9d5dc329641961f8440ea5c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: []
+  prefab: {fileID: 651784017072652252, guid: 31ae7cda1aa71464c8c89cd8a99feacd, type: 3}
+  size: 5
+  capacity: 5
+  createOnEmpty: 0
+--- !u!114 &1169009734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169009728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3e6d9d5dc329641961f8440ea5c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: []
+  prefab: {fileID: 4918284159037382585, guid: 876eaa7b712c9ee42a03fce153615442, type: 3}
+  size: 5
+  capacity: 5
+  createOnEmpty: 0
 --- !u!4 &1665463984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6088635937913590178, guid: ba6753669b45886449b7aaaf7496277c, type: 3}
