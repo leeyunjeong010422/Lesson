@@ -1,9 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
 public class RayTarget : MonoBehaviour
 {
-    [SerializeField] int hp = 3;
+    [SerializeField] public int hp = 3;
     [SerializeField] RayMakeMonster makeMonster;
 
     public void TakeHit(int damage)
@@ -17,19 +16,8 @@ public class RayTarget : MonoBehaviour
 
     private void Die()
     {
-        // 코루틴 시작
-        StartCoroutine(RespawnMonsterAfterDelay(3f));
-    }
-
-    private IEnumerator RespawnMonsterAfterDelay(float delay)
-    {
-        // 현재 몬스터 오브젝트 삭제
-        Destroy(gameObject);
-
-        // 3초 동안 대기
-        yield return new WaitForSeconds(delay);
-
+        // 몬스터 오브젝트가 삭제되고 새로운 몬스터를 생성
         makeMonster.MakeMonster();
-
+        Destroy(gameObject);
     }
 }

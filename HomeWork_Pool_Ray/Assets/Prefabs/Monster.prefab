@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6031461126305589776}
   - component: {fileID: 4473760563458807601}
   - component: {fileID: 3795298813467942267}
-  - component: {fileID: 8620648585907473943}
+  - component: {fileID: 1617578362817137944}
   - component: {fileID: 1575485806483309539}
   m_Layer: 7
   m_Name: Monster
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
-  makeMonster: {fileID: 8620648585907473943}
+  makeMonster: {fileID: 1617578362817137944}
 --- !u!114 &3795298813467942267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   rb: {fileID: 1575485806483309539}
   speed: 10
   target: {fileID: 0}
---- !u!114 &8620648585907473943
+--- !u!114 &1617578362817137944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 4473760563458807500}
-  xRange: 2
-  zRange: 2
+  xRange: 10
+  zRange: 10
   yPosition: 2
 --- !u!54 &1575485806483309539
 Rigidbody:
