@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class FPS_Controller : MonoBehaviour
+public class CoFPS_Controller : MonoBehaviour
 {
     [SerializeField] Transform camTransform;
     [SerializeField] float rotateSpeed;
     [SerializeField] float moveSpeed;
     [SerializeField] public int attack;
 
-    [SerializeField] Target target;
+    [SerializeField] Co_Target target;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawnPoint;
     [SerializeField] float bulletSpeed;
@@ -29,9 +29,9 @@ public class FPS_Controller : MonoBehaviour
         Move();
         Look();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isFiring && currentAmmo > 0)
         {
-            Fire();
+            StartCoroutine(Fire());
         }
     }
 
@@ -55,17 +55,40 @@ public class FPS_Controller : MonoBehaviour
         camTransform.Rotate(Vector3.right, rotateSpeed * -y * Time.deltaTime);
     }
 
-    private void Fire()
+    private IEnumerator Fire()
     {
-        if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit))
-        {
-            GameObject instance = hit.collider.gameObject;
-            Target target = instance.GetComponent<Target>();
+        isFiring = true;
 
-            if (target != null)
+        while (Input.GetMouseButton(0) && currentAmmo > 0)
+        {
+            currentAmmo--;
+            if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit))
             {
-                target.TakeHit(attack);
+                GameObject instance = hit.collider.gameObject;
+                Co_Target target = instance.GetComponent<Co_Target>();
+
+                if (target != null)
+                {
+                    target.TakeHit(attack);
+                }
             }
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+            // 총알에 Rigidbody가 있는지 확인하고, 있으면 속도 설정
+            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+            if (bulletRigidbody != null)
+            {
+                bulletRigidbody.velocity = -bulletSpawnPoint.right * bulletSpeed;
+            }
+
+            yield return new WaitForSeconds(fireRate);
         }
+        if (currentAmmo <= 0)
+        {
+            Debug.Log("장전이 필요합니다!");
+        }
+
+        isFiring = false;
     }
 }
