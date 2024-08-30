@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RayMakeMonster : MonoBehaviour
 {
-    [SerializeField] GameObject monsterPrefab; // 몬스터 프리팹
+    [SerializeField] GameObject monsterPrefab;
 
     // 몬스터가 랜덤으로 생성될 위치
     [SerializeField] float xRange = 2;
@@ -20,7 +20,7 @@ public class RayMakeMonster : MonoBehaviour
         RayTarget rayTarget = newMonster.GetComponent<RayTarget>();
         if (rayTarget != null)
         {
-            rayTarget.hp = 3; // hp를 3으로 설정
+            rayTarget.hp = 3;
         }
     }
 }

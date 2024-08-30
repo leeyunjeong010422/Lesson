@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        // 타겟을 향해 일정한 속도로 이동합니다.
+        // 타겟한테 이동
         if (target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
