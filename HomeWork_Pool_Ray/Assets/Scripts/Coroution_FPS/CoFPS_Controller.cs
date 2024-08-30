@@ -17,6 +17,7 @@ public class CoFPS_Controller : MonoBehaviour
 
     private int currentAmmo;
     private bool isFiring;
+    private bool isReloading;
 
     private void Start()
     {
@@ -29,7 +30,12 @@ public class CoFPS_Controller : MonoBehaviour
         Move();
         Look();
 
-        if (Input.GetMouseButtonDown(0) && !isFiring && currentAmmo > 0)
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        {         
+            StartCoroutine(Reload());
+        }
+
+        if (Input.GetMouseButtonDown(0) && !isFiring && !isReloading && currentAmmo > 0)
         {
             StartCoroutine(Fire());
         }
@@ -90,5 +96,14 @@ public class CoFPS_Controller : MonoBehaviour
         }
 
         isFiring = false;
+    }
+
+    //2초 뒤에 장전하기
+    private IEnumerator Reload()
+    {      
+        isReloading = true;
+        yield return new WaitForSeconds(2f);
+        currentAmmo = maxAmmo;
+        isReloading = false;
     }
 }

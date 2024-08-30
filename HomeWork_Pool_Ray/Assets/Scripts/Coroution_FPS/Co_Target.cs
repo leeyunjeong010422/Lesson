@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class Co_Target : MonoBehaviour
 {
-    [SerializeField] int hp;
-    public void TakeHit(int attack)
+    [SerializeField] Co_MakeMonster makeMonster;
+    [SerializeField] public int hp;
+    public void TakeHit(int damage)
     {
-        hp -= attack;
+        hp -= damage;
 
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        //makeMonster.MakeMonster();
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
+        makeMonster.MakeMonster(gameObject);
+
     }
 }
