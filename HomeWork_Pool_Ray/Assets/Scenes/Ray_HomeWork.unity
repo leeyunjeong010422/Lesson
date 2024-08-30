@@ -210,7 +210,6 @@ MonoBehaviour:
   turretRotateSpeed: 50
   maxTurretVerticalAngle: 60
   muzzlePoint: {fileID: 1780314498}
-  hitGameOut: 5
 --- !u!4 &11144486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 919799467963084226, guid: ba6753669b45886449b7aaaf7496277c, type: 3}
@@ -487,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab_1: {fileID: -8525941258709044493, guid: d5efacc430d784a45a8692f2ff1dac8a, type: 3}
-  bulletPrefab_2: {fileID: 2918928946629335133, guid: f4818dc7206f3ca43bbb69db73776821, type: 3}
+  bulletPrefab_2: {fileID: 1754128348236078221, guid: fc7127ae134a3c7468d6756c9c957517, type: 3}
   muzzlePoint: {fileID: 1780314498}
   bulletSpeed: 10
   damege: 1

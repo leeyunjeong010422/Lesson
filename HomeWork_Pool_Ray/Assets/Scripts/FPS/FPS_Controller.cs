@@ -11,6 +11,7 @@ public class FPS_Controller : MonoBehaviour
     [SerializeField] Target target;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] float bulletSpeed;
     [SerializeField] float fireRate;
     [SerializeField] int maxAmmo = 30;
 
@@ -73,6 +74,14 @@ public class FPS_Controller : MonoBehaviour
             }
 
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+            // 총알에 Rigidbody가 있는지 확인하고, 있으면 속도 설정
+            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+            if (bulletRigidbody != null)
+            {
+                bulletRigidbody.velocity = -bulletSpawnPoint.right * bulletSpeed;
+            }
+
             yield return new WaitForSeconds(fireRate);
         }
         if (currentAmmo <= 0)
