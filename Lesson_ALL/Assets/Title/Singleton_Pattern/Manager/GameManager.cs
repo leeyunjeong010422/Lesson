@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             //score의 값이 씬을 전환해도 값이 바뀌지 않음
             //씬이 바뀌어도 사라지지 않고 냅둠
             //다른 씬에 GameManager을 만들지 않더라도 그대로 옮겨짐
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         //2. 싱글톤이 있었으면 => 지금 만든 인스턴스를 삭제하자
         else // (instance != null)인 상황
@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
 
         // Resources.Load<T>(path) : Resources 폴더 안의 경로에서 에셋을 찾아 참조함
 
-        GameManager gameManagerPrefab = Resources.Load<GameManager>("Managers/GameManager");
-        Instantiate(gameManagerPrefab);
+        //GameManager gameManagerPrefab = Resources.Load<GameManager>("Managers/GameManager");
+        //Instantiate(gameManagerPrefab);
     }
 
     //싱글톤 지우기

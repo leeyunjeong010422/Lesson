@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Title/Singleton_Pattern/SceneChange/TitleScene.unity
-    guid: c381ca8bd2f56a944837e8660eb99795
+    path: Assets/Title/Async/TitleScene.unity
+    guid: 8907df76c9857f74796a6c79bdaf2b9b
   - enabled: 1
-    path: Assets/Title/Singleton_Pattern/SceneChange/MainScene.unity
-    guid: 563597aa94953e3419d1f5a9b9dbf083
+    path: Assets/Title/Async/GameScene.unity
+    guid: 97bb32a1b1579e948a02dbad448e5ba3
   m_configObjects: {}
