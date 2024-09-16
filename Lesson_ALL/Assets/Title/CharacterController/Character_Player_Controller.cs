@@ -23,6 +23,7 @@ public class Character_Player_Controller : MonoBehaviour
 
         controller.Move(dir * speed * Time.deltaTime);
 
+        //땅으로 레이캐스트를 쏴서 하는 게 나음 controller.isGrounded 별로 안 좋은 성능임
         if (controller.isGrounded == false )
         {
             ySpeed -= Physics.gravity.y * Time.deltaTime;
